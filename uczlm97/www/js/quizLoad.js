@@ -10,6 +10,31 @@ var ptMarkerBlue=L.AwesomeMarkers.icon({
 	icon:'play',
 	markerColor:'blue'});
 
+function checkQuizLayer()
+{
+	if (document.getElementById('switch1').checked) 
+	{
+		loadQuizPoint();
+	} 
+	else {
+		removeQuestionPoint();
+	}
+}
+
+//method to call the other functions to load 
+//all the quiz points created by my user only
+function loadQuizPoint() 
+{
+	startQuizLoad();
+}
+
+//to remove all the loaded question points
+function removeQuestionPoint() 
+{
+	//Quiz Points data will be removed
+	mymap.removeLayer(QuizPointLayer);
+}
+
 function startQuizLoad() {
 	xhrQuiz = new XMLHttpRequest();
 	var url = "http://developer.cege.ucl.ac.uk:"+httpPortNumber;
@@ -25,7 +50,7 @@ function quizPointsResponse(){
 	// once the data is ready, process the data
 	var quizPointsData = xhrQuiz.responseText;
 	loadQuizLayer(quizPointsData);
-	}
+}
 }
 
 
