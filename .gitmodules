@@ -1,0 +1,9 @@
+[submodule "uczlm97/www/js"]
+	path = uczlm97/www/js
+	url = https://github.com/GEOGMLIU/cege0043-jsReference
+[submodule "uczlm97/www/css"]
+	path = uczlm97/www/css
+	url = https://github.com/GEOGMLIU/cege0043-cssReference
+[submodule "uczlm97/www/images"]
+	path = uczlm97/www/images
+	url = https://github.com/GEOGMLIU/cege0043-imagesReference
