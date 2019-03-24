@@ -10,30 +10,6 @@ var ptMarkerBlue=L.AwesomeMarkers.icon({
 	icon:'play',
 	markerColor:'blue'});
 
-function checkQuizLayer()
-{
-	if (document.getElementById('switch1').checked) 
-	{
-		loadQuizPoint();
-	} 
-	else {
-		removeQuestionPoint();
-	}
-}
-
-//method to call the other functions to load 
-//all the quiz points created by my user only
-function loadQuizPoint() 
-{
-	startQuizLoad();
-}
-
-//to remove all the loaded question points
-function removeQuestionPoint() 
-{
-	//Quiz Points data will be removed
-	mymap.removeLayer(QuizPointLayer);
-}
 
 function startQuizLoad() {
 	xhrQuiz = new XMLHttpRequest();
@@ -139,18 +115,6 @@ function showCorrectNum(){
 	xhrCorrectNum.send();
 }
 
-// the code to show the user's ranking
-function showRanking(){
-	xhrUserRanking = new XMLHttpRequest();
-	var url = "http://developer.cege.ucl.ac.uk:"+httpPortNumber;
-	url = url + "/getRanking/"+httpPortNumber;
-	xhrUserRanking.open("GET", url, true);
-	xhrUserRanking.onreadystatechange = rankingResponse;
-	xhrUserRanking.send();
-}
-
-
-
 function ansNumResponse(){
 	if (xhrCorrectNum.readyState == 4) {
 		// once the data is ready, process the data
@@ -167,6 +131,48 @@ function ansNumResponse(){
 	}
 }
 
+// the code to show the user's ranking
+function showRanking(){
+	xhrUserRanking = new XMLHttpRequest();
+	url="http://developer.cege.ucl.ac.uk:30289/getTopScorers/30289";
+	xhrUserRanking.open("GET", url, true);
+	xhrUserRanking.onreadystatechange = rankingResponse;
+	xhrUserRanking.send();
+}
+
+function rankingResponse(){
+	if (xhrUserRanking.readyState == 4) {
+		// once the data is ready, process the data
+		var rankingString = xhrUserRanking.responseText;
+		console.log(rankingString);
+		//the code is to convert string into JSON format array
+		//in order to get the rank
+		var rankingData="";
+		for (var i = 1; i <rankingString.length-1; i++) {
+			rankingData=rankingData+rankingString[i];
+		}
+		console.log(rankingData);
+		var rankingJSON = JSON.parse(rankingData);
+		console.log(rankingJSON);
+		//alert("You ranking is: "+ rankingJSON.array_to_json[0].rank + ".");
+	}
+}
+
+/*
+// the code to show the user's ranking
+function showRanking(){
+	xhrUserRanking = new XMLHttpRequest();
+	var url = "http://developer.cege.ucl.ac.uk:"+httpPortNumber;
+	url = url + "/getRanking/"+httpPortNumber;
+	xhrUserRanking.open("GET", url, true);
+	xhrUserRanking.onreadystatechange = rankingResponse;
+	xhrUserRanking.send();
+}
+
+
+
+
+
 function rankingResponse(){
 	if (xhrUserRanking.readyState == 4) {
 		// once the data is ready, process the data
@@ -182,3 +188,4 @@ function rankingResponse(){
 		alert("You ranking is: "+ rankingJSON.array_to_json[0].rank + ".");
 	}
 }
+*/
