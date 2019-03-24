@@ -27,10 +27,10 @@ The **system requirements** that the developer used show in the following list:
 ## Deployment
 
 Please follow the notes below to deploy this App. There are slightly different between the questionApp and quizApp deployment, as due to the github submodule issues, the quizApp works without submodules but questionApp uses submodules.
-***NB***The questionApp and quizApp should be deploy and test separately.
+*NB.*  The questionApp and quizApp should be deployed and tested separately -i.e. cannot be run at the same time.
 
 ### Server
-We need to download the HTTP server and copy it onto the specific directory. Then, before running the test, we are supposed to start the server first.
+We need to download the HTTP server and copy it to the specific directory. Then, before running the test, we are supposed to start the server first.
 
 1. Download [httpServer.js](https://github.com/ucl-geospatial/uczlm97_server/blob/master/httpServer.js)
 2. Copy httpServer.js to /code directory (the Ubuntu Server )
@@ -40,17 +40,18 @@ pm2 start httpServer.js
 ```
 ###  questionApp
 This App uses github submodules. Therefor, the deloyment process is as follows:
-1. Check the directory
+ 1. Check the directory
 ```
 pwd
 /home/studentuser/code
 ```
-2.  Connect to the questionApp repository
+ 2.  Connect to the questionApp repository
 ```
 git clone https://github.com/ucl-geospatial/uczlm97_questions.git --recurse-submodules
 ```
-3. Enter the github username and password
-4. Change the working directory
+>If this repository doesn't work, please go to [cege0043_questionApp](https://github.com/GEOGMLIU/cege0043_questionApp) to get the same content.
+ 3. Enter the github username and password
+ 4. Change the working directory
 ```
 cd uczlm97_questions/uczlm97/www
 ```
@@ -58,20 +59,22 @@ cd uczlm97_questions/uczlm97/www
 ###  quizApp
 
 Due to the github submodule issues, this quizApp works without submodules. Its deployment steps are:
-1. Check the directory
+ 1. Check the directory
 ```
 pwd
 /home/studentuser/code
 ```
-2.  Connect to the questionApp repository
+ 2.  Connect to the quizApp repository
 ```
 git clone https://github.com/ucl-geospatial/uczlm97_quiz.git
 ```
-3. Enter the github username and password
-4. Change the working directory
+>If this repository doesn't work, please go to [cege0043_quiz](https://github.com/GEOGMLIU/cege0043_quizApp) to get the same content.
+ 3. Enter the github username and password
+ 4. Change the working directory
 ```
 cd uczlm97_quiz/uczlm97/www
 ```
+
 
 ## Tests
 After the deployment, you can test the App now.
