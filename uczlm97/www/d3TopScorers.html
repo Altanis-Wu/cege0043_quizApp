@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <head>
   <title>D3 Graph</title>
@@ -11,15 +12,12 @@
     .bar {
       fill: #71EEB8;
     }
-
     .bar:hover {
       fill: slateblue;
     }
-
     .axis-x path {
       display: none;
     }
-
     .axis text {
       font-weight: bold;
     }
@@ -39,7 +37,6 @@
     y       = d3.scaleLinear().rangeRound([height, 0]),
     g       = svg.append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
-
   //get json data
   d3.json("http://developer.cege.ucl.ac.uk:30289/getTopScorers/30289.json").then(data => {
     //as it is difficult for me to apply JSON array
@@ -49,25 +46,18 @@
     for (var i = 1; i <data.length-1; i++) {
       rankingData=rankingData+data[i];
     }
-    alert(rankingData);
     var dataJSON = JSON.parse(rankingData);
-
     //json object; then can use data.map()
     data = dataJSON.array_to_json;
-
     x.domain(data.map(d => d.port_id));
     y.domain([0, d3.max(data, d => d.rank)]);
-
     g.append("g")
     .attr("class", "axis axis-x")
     .attr("transform", `translate(0,${height})`)
     .call(d3.axisBottom(x));
-
-
     g.append("g")
     .attr("class", "axis axis-y")
     .call(d3.axisLeft(y).ticks(5).tickSize(8));
-
     g.selectAll(".bar")
     .data(data)
     .enter().append("rect")
@@ -85,7 +75,6 @@
     .style("font-weight", "bold")  
     .text(`Couldn't open the data file: "${err}".`);
   });
-
 </script> 
 
 
