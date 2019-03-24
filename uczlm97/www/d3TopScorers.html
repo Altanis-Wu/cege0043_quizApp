@@ -28,7 +28,13 @@
 
 
   <svg width="1000" height="500"></svg>
-  <script>
+  <script>    
+    alert("url");
+    getPort();
+    alert(httpPortNumber);
+    var url = "http://developer.cege.ucl.ac.uk:"+httpPortNumber;
+    url = url + "/getTopScorers/"+httpPortNumber +".json";
+    alert(url);
     const svg     = d3.select("svg"),
     margin  = {top: 20, right: 20, bottom: 30, left: 50},
     width   = +svg.attr("width")  - margin.left - margin.right,
@@ -37,8 +43,10 @@
     y       = d3.scaleLinear().rangeRound([height, 0]),
     g       = svg.append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
-  //get json data
-  d3.json("http://developer.cege.ucl.ac.uk:30289/getTopScorers/30289.json").then(data => {
+    //get json data
+    //http://developer.cege.ucl.ac.uk:30289/getTopScorers/30289.json
+
+    d3.json(url).then(data => {
     //as it is difficult for me to apply JSON array
     //here, convert it into string and then get its type back to JSON object
     data=JSON.stringify(data);
@@ -67,16 +75,16 @@
     .attr("width", x.bandwidth())
     .attr("height", d => height - y(d.rank));
   })
-  .catch(err => {
-    svg.append("text")         
-    .attr("y", 20)
-    .attr("text-anchor", "left")  
-    .style("font-size", "20px") 
-    .style("font-weight", "bold")  
-    .text(`Couldn't open the data file: "${err}".`);
-  });
-</script> 
-
+    .catch(err => {
+      svg.append("text")         
+      .attr("y", 20)
+      .attr("text-anchor", "left")  
+      .style("font-size", "20px") 
+      .style("font-weight", "bold")  
+      .text(`Couldn't open the data file: "${err}".`);
+    });
+  </script> 
+  <script src="js/utilities.js"></script>
 
 
 </body>

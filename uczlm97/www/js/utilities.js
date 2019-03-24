@@ -16,4 +16,5 @@ function getPort(){
 	var configLocation = "res/port.xml";
 	portXhr.open("get", configLocation, false);
 	portXhr.send();
+	alert(httpPortNumber);
 }

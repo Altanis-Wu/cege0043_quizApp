@@ -1,15 +1,21 @@
 //global varible for question App
 //load and remove the Quiz points
 var QuizPointLayer;
+//global variable that holds the last 5 questions that the user answered
+var lastPointLayer;
 //create variables that will hold the XML Http Request()
 var xhrQuiz;
 var xhrCorrectNum;
 var xhrUserRanking;
-//custom marker show quiz points
+var xhrLastPt;
+//custom marker shows quiz points
 var ptMarkerBlue=L.AwesomeMarkers.icon({
 	icon:'play',
 	markerColor:'blue'});
-
+//marker shows last 5 questions that user answered
+var ptMarkerOrg=L.AwesomeMarkers.icon({
+	icon:'play',
+	markerColor:'orange'});
 
 function startQuizLoad() {
 	xhrQuiz = new XMLHttpRequest();
@@ -23,10 +29,10 @@ function startQuizLoad() {
 
 function quizPointsResponse(){
 	if (xhrQuiz.readyState == 4) {
-	// once the data is ready, process the data
-	var quizPointsData = xhrQuiz.responseText;
-	loadQuizLayer(quizPointsData);
-}
+		// once the data is ready, process the data
+		var quizPointsData = xhrQuiz.responseText;
+		loadQuizLayer(quizPointsData);
+	}
 }
 
 
@@ -131,34 +137,7 @@ function ansNumResponse(){
 	}
 }
 
-// the code to show the user's ranking
-function showRanking(){
-	xhrUserRanking = new XMLHttpRequest();
-	url="http://developer.cege.ucl.ac.uk:30289/getTopScorers/30289";
-	xhrUserRanking.open("GET", url, true);
-	xhrUserRanking.onreadystatechange = rankingResponse;
-	xhrUserRanking.send();
-}
 
-function rankingResponse(){
-	if (xhrUserRanking.readyState == 4) {
-		// once the data is ready, process the data
-		var rankingString = xhrUserRanking.responseText;
-		console.log(rankingString);
-		//the code is to convert string into JSON format array
-		//in order to get the rank
-		var rankingData="";
-		for (var i = 1; i <rankingString.length-1; i++) {
-			rankingData=rankingData+rankingString[i];
-		}
-		console.log(rankingData);
-		var rankingJSON = JSON.parse(rankingData);
-		console.log(rankingJSON);
-		//alert("You ranking is: "+ rankingJSON.array_to_json[0].rank + ".");
-	}
-}
-
-/*
 // the code to show the user's ranking
 function showRanking(){
 	xhrUserRanking = new XMLHttpRequest();
@@ -168,10 +147,6 @@ function showRanking(){
 	xhrUserRanking.onreadystatechange = rankingResponse;
 	xhrUserRanking.send();
 }
-
-
-
-
 
 function rankingResponse(){
 	if (xhrUserRanking.readyState == 4) {
@@ -188,4 +163,64 @@ function rankingResponse(){
 		alert("You ranking is: "+ rankingJSON.array_to_json[0].rank + ".");
 	}
 }
-*/
+
+function startLastPtLoad() {
+	alert("heyyy");
+	xhrLastPt = new XMLHttpRequest();
+	var url = "http://developer.cege.ucl.ac.uk:"+httpPortNumber;
+	url = url + "/getLast5/"+httpPortNumber;
+	xhrLastPt.open("GET", url, true);
+	xhrLastPt.onreadystatechange = lastPtResponse;
+	xhrLastPt.send();
+
+}
+
+function lastPtResponse(){
+	if (xhrLastPt.readyState == 4) {
+		// once the data is ready, process the data
+		var lastPointsData = xhrLastPt.responseText;
+		loadLastPtLayer(lastPointsData);
+	}
+}
+
+
+// keep the layer global so that we can automatically pop up a
+// pop-up menu on a point if necessary
+// we can also use this to determine distance for the proximity alert
+function loadLastPtLayer(lastPointsData) {
+
+	// convert the text received from the server to JSON
+	var formJSON = JSON.parse(lastPointsData);
+	// load the geoJSON layer
+	lastPointLayer = L.geoJson(formJSON,
+	{
+		// use point to layer to create the points
+		pointToLayer: function (feature, latlng)
+		{
+				// in this case, we build an HTML DIV string
+				// using the values in the data
+				var htmlString = "<DIV id='popup'"+ feature.properties.question_title + "><h2>" + feature.properties.question_title + "</h2><br>";
+				htmlString = htmlString + "<h3>"+feature.properties.question_text +"</h3><br>";
+				htmlString = htmlString + "<input type='radio' name='answer' id ='answer_1'/>"+feature.properties.answer_1+"<br>";
+				htmlString = htmlString + "<input type='radio' name='answer' id ='answer_2'/>"+feature.properties.answer_2+"<br>";
+				htmlString = htmlString + "<input type='radio' name='answer' id ='answer_3'/>"+feature.properties.answer_3+"<br>";
+				htmlString = htmlString + "<input type='radio' name='answer' id ='answer_4'/>"+feature.properties.answer_4+"<br>";
+				htmlString = htmlString + "<button onclick='checkAnswer(" + feature.properties.id + ");return false;'>Submit Answer</button>"; 
+
+              	// now include a hidden element with the answer               
+              	// in this case the answer is alwasy the first choice               
+             	// for the assignment this will of course vary - you can use feature.properties.correct_answer               
+             	htmlString = htmlString + "<div id=answer" + feature.properties.id + " hidden>" + feature.properties.correct_answer+ "</div>";
+             	htmlString = htmlString + "</div>";
+				//return L.marker(latlng);
+				//show the quiz depends on the user answered right or wrong (first one in timestamp)
+				if (feature.properties.answer_correct===true) {
+					return L.marker(latlng, {icon:wrongMarker}).bindPopup(htmlString);
+				}
+				else{
+					return L.marker(latlng, {icon:correctMarker}).bindPopup(htmlString);
+				}
+			},
+		}).addTo(mymap);
+	mymap.fitBounds(lastPointLayer.getBounds());
+}
