@@ -17,6 +17,15 @@ var ptMarkerOrg=L.AwesomeMarkers.icon({
 	icon:'play',
 	markerColor:'orange'});
 
+//about function
+function menuClicked(){
+	alert("If you have any problem, please contact uczlm97@ucl.ac.uk .")
+}
+
+//to get the questions points from database using
+//the functions adapted from here: 
+//https://moodle-1819.ucl.ac.uk/mod/folder/view.php?id=1025047
+//accessed 10th March 2019
 function startQuizLoad() {
 	xhrQuiz = new XMLHttpRequest();
 	var url = "http://developer.cege.ucl.ac.uk:"+httpPortNumber;
@@ -101,9 +110,7 @@ function closestFormPoint() {
 
 	// show the popup for the closest point  
 	QuizPointLayer.eachLayer(function(layer) {   
-		//alert(layer.feature.properties.id);
 		if (layer.feature.properties.id == closestFormPoint){    
-			//alert("hey3");
 			layer.openPopup();   
 		}  
 	}); 
@@ -164,8 +171,8 @@ function rankingResponse(){
 	}
 }
 
+//the following functions are used to load the last 5 question
 function startLastPtLoad() {
-	alert("heyyy");
 	xhrLastPt = new XMLHttpRequest();
 	var url = "http://developer.cege.ucl.ac.uk:"+httpPortNumber;
 	url = url + "/getLast5/"+httpPortNumber;

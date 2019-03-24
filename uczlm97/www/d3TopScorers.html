@@ -28,13 +28,11 @@
 
 
   <svg width="1000" height="500"></svg>
+  <script src="js/utilities.js"></script>
   <script>    
-    alert("url");
     getPort();
-    alert(httpPortNumber);
     var url = "http://developer.cege.ucl.ac.uk:"+httpPortNumber;
     url = url + "/getTopScorers/"+httpPortNumber +".json";
-    alert(url);
     const svg     = d3.select("svg"),
     margin  = {top: 20, right: 20, bottom: 30, left: 50},
     width   = +svg.attr("width")  - margin.left - margin.right,
@@ -84,7 +82,6 @@
       .text(`Couldn't open the data file: "${err}".`);
     });
   </script> 
-  <script src="js/utilities.js"></script>
 
 
 </body>
