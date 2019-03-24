@@ -156,7 +156,8 @@ app.get('/getQuizPoints/:port_id', function (req,res) {
 
 });
 
-
+// user is told how many questions they have answered correctly 
+//when they answer a question (xxxx is the port_id of the particular person)
 app.get('/getCorrectAnsNum/:port_id', function (req,res) {
  pool.connect(function(err,client,done) {
   if(err){
@@ -189,6 +190,7 @@ app.get('/getCorrectAnsNum/:port_id', function (req,res) {
 
 });
 
+//user is given their ranking (in comparison to all other users)
 app.get('/getRanking/:port_id', function (req,res) {
  pool.connect(function(err,client,done) {
   if(err){
@@ -231,6 +233,7 @@ app.get('/getRanking/:port_id', function (req,res) {
 
 });
 
+//graph showing top 5 scorers in the quiz
 app.get('/getTopScorers/:port_id', function (req,res) {
  pool.connect(function(err,client,done) {
   if(err){
@@ -272,6 +275,8 @@ app.get('/getTopScorers/:port_id', function (req,res) {
 
 });
 
+//graph showing daily participation rates for the past week 
+//(how many questions have been answered, and how many answers were correct)
 app.get('/getMyDailyRates/:port_id', function (req,res) {
  pool.connect(function(err,client,done) {
   if(err){
@@ -346,6 +351,7 @@ app.get('/getAllRates/:port_id', function (req,res) {
 
 });
 
+//map layer showing all the questions added in the last week (by any user).
 app.get('/getLatestQuestions/:port_id', function (req,res) {
  pool.connect(function(err,client,done) {
   if(err){
@@ -371,6 +377,94 @@ app.get('/getLatestQuestions/:port_id', function (req,res) {
          // var port_id = req.params.port_id; //
           // run the second query
           client.query(querystring,function(err,result){
+            //call `done()` to release the client back to the pool
+            done();
+            if(err){
+              console.log(err);
+              res.status(400).send(err);
+            }
+            res.status(200).send(result.rows);
+          });
+        });
+
+});
+
+//Questions App: list of the 5 most difficult questions (via a menu option) 
+//– i.e. where most wrong answers were given
+app.get('/getMostDiff/:port_id', function (req,res) {
+ pool.connect(function(err,client,done) {
+  if(err){
+    console.log("not able to get connection "+ err);
+    res.status(400).send(err);
+  }
+  var colnames = "id, question_id, answer_selected, correct_answer,";
+  colnames = colnames + "port_id";
+  console.log("colnames are " + colnames);
+
+  var querystring = "SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features  FROM ";
+  querystring=querystring+"(SELECT 'Feature' As type     , ST_AsGeoJSON(lg.location)::json As geometry, ";
+  querystring=querystring+"row_to_json((SELECT l FROM (SELECT id, question_title, question_text, answer_1, answer_2, answer_3, answer_4, port_id, correct_answer) As l ";
+  querystring=querystring+" )) As properties";
+  querystring=querystring+" FROM public.quizquestion  As lg limit 100  ) As f";
+          // now use the inbuilt geoJSON functionality
+          // and create the required geoJSON format using a query adapted from here:
+          // http://www.postgresonline.com/journal/archives/267-Creating-GeoJSON-Feature-Collections-with-JSON-and-PostGIS-functions.html, accessed 4th January 2018
+          // note that query needs to be a single string with no line breaks so built it up bit by bit
+
+
+          console.log(querystring);
+         // var port_id = req.params.port_id; //
+          // run the second query
+          client.query(querystring,function(err,result){
+            //call `done()` to release the client back to the pool
+            done();
+            if(err){
+              console.log(err);
+              res.status(400).send(err);
+            }
+            res.status(200).send(result.rows);
+          });
+        });
+
+});
+
+//map showing the last 5 questions that the user answered (colour coded 
+//depending on whether they were right/wrong the first time they answered the question)
+app.get('/getLast5/:port_id', function (req,res) {
+ pool.connect(function(err,client,done) {
+  if(err){
+    console.log("not able to get connection "+ err);
+    res.status(400).send(err);
+  }
+  var colnames = "id, question_id, answer_selected, correct_answer,";
+  colnames = colnames + "port_id";
+  console.log("colnames are " + colnames);       
+          var querystring ="SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features  FROM ";
+          querystring=querystring+"(SELECT 'Feature' As type     , ST_AsGeoJSON(lg.location)::json As geometry, ";
+          querystring=querystring+"row_to_json((SELECT l FROM (SELECT id, question_title, question_text, answer_1, answer_2, answer_3, answer_4, port_id, correct_answer, answer_correct) As l ";
+          querystring=querystring+")) As properties ";
+          querystring=querystring+"FROM ";
+          querystring=querystring+"(select a.*, b.answer_correct from public.quizquestion a inner join ";
+          //querystring=querystring+"inner join ";
+          querystring=querystring+"(select question_id, answer_selected=correct_answer as answer_correct ";
+          querystring=querystring+"from public.quizanswers ";
+          querystring=querystring+"where port_id = $1 ";
+          querystring=querystring+"order by timestamp desc ";
+          querystring=querystring+"limit 5) b ";
+          querystring=querystring+"on a.id = b.question_id) as lg) As f ";
+          
+
+
+          // now use the inbuilt geoJSON functionality
+          // and create the required geoJSON format using a query adapted from here:
+          // http://www.postgresonline.com/journal/archives/267-Creating-GeoJSON-Feature-Collections-with-JSON-and-PostGIS-functions.html, accessed 4th January 2018
+          // note that query needs to be a single string with no line breaks so built it up bit by bit
+
+
+          console.log(querystring);
+          var port_id = req.params.port_id; //
+          // run the second query
+          client.query(querystring,[port_id],function(err,result){
             //call `done()` to release the client back to the pool
             done();
             if(err){
