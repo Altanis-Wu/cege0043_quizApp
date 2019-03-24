@@ -27,10 +27,10 @@ The **system requirements** that the developer used show in the following list:
 ## Deployment
 
 Please follow the notes below to deploy this App. There are slightly different between the questionApp and quizApp deployment, as due to the github submodule issues, the quizApp works without submodules but questionApp uses submodules.
-***NB***The questionApp and quizApp should be deploy and test separately.
+*NB.*  The questionApp and quizApp should be deployed and tested separately -i.e. cannot be run at the same time.
 
 ### Server
-We need to download the HTTP server and copy it onto the specific directory. Then, before running the test, we are supposed to start the server first.
+We need to download the HTTP server and copy it to the specific directory. Then, before running the test, we are supposed to start the server first.
 
 1. Download [httpServer.js](https://github.com/ucl-geospatial/uczlm97_server/blob/master/httpServer.js)
 2. Copy httpServer.js to /code directory (the Ubuntu Server )
@@ -40,17 +40,18 @@ pm2 start httpServer.js
 ```
 ###  questionApp
 This App uses github submodules. Therefor, the deloyment process is as follows:
-1. Check the directory
+ 1. Check the directory
 ```
 pwd
 /home/studentuser/code
 ```
-2.  Connect to the questionApp repository
+ 2.  Connect to the questionApp repository
 ```
 git clone https://github.com/ucl-geospatial/uczlm97_questions.git --recurse-submodules
 ```
-3. Enter the github username and password
-4. Change the working directory
+>If this repository doesn't work, please go to [cege0043_questionApp](https://github.com/GEOGMLIU/cege0043_questionApp) to get the same content.
+ 3. Enter the github username and password
+ 4. Change the working directory
 ```
 cd uczlm97_questions/uczlm97/www
 ```
@@ -58,61 +59,62 @@ cd uczlm97_questions/uczlm97/www
 ###  quizApp
 
 Due to the github submodule issues, this quizApp works without submodules. Its deployment steps are:
-1. Check the directory
+ 1. Check the directory
 ```
 pwd
 /home/studentuser/code
 ```
-2.  Connect to the questionApp repository
+ 2.  Connect to the quizApp repository
 ```
 git clone https://github.com/ucl-geospatial/uczlm97_quiz.git
 ```
-3. Enter the github username and password
-4. Change the working directory
+>If this repository doesn't work, please go to [cege0043_quiz](https://github.com/GEOGMLIU/cege0043_quizApp) to get the same content.
+ 3. Enter the github username and password
+ 4. Change the working directory
 ```
 cd uczlm97_quiz/uczlm97/www
 ```
-
 ## Tests
 After the deployment, you can test the App now.
-***NB***The questionApp and quizApp should be deploy and test separately.
+*NB.* The questionApp and quizApp should be deployed and tested separately.
 
 
 ###  questionApp
-- Start the PhoneGap App Server
-> ```
+ - Start the PhoneGap App Server
+ > ```
 >phonegap serve
 >```
-- Go to [http://developer.cege.ucl.ac.uk:31289/](http://developer.cege.ucl.ac.uk:31289/) in your browser
-
-- Click a point on the map and fill in the question form, then submit
-In the App homepage, we can click on a point on the Leaflet map. The function will help us fill in the latitude and longitude automatically (you can also type in them manually). After finishing the table, we should press the "submit" button to upload the data. 
->Simple question example:
->title: Calculation
->text: 1 + 1 =
->answer_1: 1
->answer_2: 2
->answer_3: 3
->answer_4: 4
->correct answer: 2
->Laititude:0
->Longitude:0
+ - Go to [http://developer.cege.ucl.ac.uk:31289/](http://developer.cege.ucl.ac.uk:31289/) in your browser
+ 
+ - Click a point on the map and fill in the question form, then submit
+ In the App homepage, we can click on a point on the Leaflet map. The function will help us fill in the latitude and longitude automatically (you can also type in them manually). After finishing the table, we should press the "submit" button to upload the data. 
+ >Simple question example:
+ >title: Calculation
+ >text: 1 + 1 =
+ >answer_1: 1
+ >answer_2: 2
+ >answer_3: 3
+ >answer_4: 4
+ >correct answer: 2
+ >Laititude:0
+ >Longitude:0
 
 > We can also check the submission at [here](http://developer.cege.ucl.ac.uk:30289/getQuizPoints/30289).
->This URL is based on HTTP port number 30289.
-- Switch on / off the question Layer
-On the right-hand side, there is a navigation bar. You can load the question point layer through the toggle switch button.
-- Click on "Participation Rates"
--my daily rates
--all users data
-- Click on "Last Week Questions"
+	 >This URL is based on HTTP port number 30289.
+ - Switch on / off the question Layer
+ On the right-hand side, there is a navigation bar. You can load the question point layer through the toggle switch button.
+  - Switch on / off the "Last Week Questions"
 A new map layer showing  map layer showing all the questions added in the last week.
-- Click on "Most difficult Questions"
-You can see the list of  the 5 most difficult questions.
-- Stop PhoneGap server and remove the quizApp code
-- Press Ctrl + C to stop the server.
-- Go back to /code directory
-- Remove the code
+  - Click on "Participation Rates"
+		-my daily rates
+		-all users data
+ - Click on "Most difficult Questions"
+ You can see the list of  the 5 most difficult questions.
+ - Stop PhoneGap server and remove the quizApp code
+	-Press Ctrl + C to stop the server 
+	-Go back to /code directory 
+	-Remove the code
+
 >```
 >pwd 
 >/home/studentuser/code
@@ -120,41 +122,42 @@ You can see the list of  the 5 most difficult questions.
 >```
 
 ###  quizApp
-- Start the PhoneGap App Server
-```
+ - Start the PhoneGap App Server
+ ```
 phonegap serve
 ```
-- Enter the server address
-Next, we can start the PhoneGap App and wait for the closet popup quiz. 
->Address example:
->[http://developer.cege.ucl.ac.uk:31289/](http://developer.cege.ucl.ac.uk:31289/).
+ - Enter the server address
+ Next, we can start the PhoneGap App and wait for the closet popup quiz. 
+ >Address example:
+ >[http://developer.cege.ucl.ac.uk:31289/](http://developer.cege.ucl.ac.uk:31289/).
 
-- Press "Submit Answer"
+ - Press "Submit Answer"
 Getting the popup, we are supposed to submit an answer. 
-Meanwhile, we will get the feedback and our scorering records (excluding this latest answer result.)
-After that, the colour of marker will change to green or red depending on the submitted answer is correct or wrong.
-- Press the icon in the upper right corner and then "Rank"
-We will get the user's ranking.
-- Press About or HELP to get some help information
+ Meanwhile, we will get the feedback and our scorering records (excluding this latest answer result.)
+ After that, the colour of marker will change to green or red depending on the submitted answer is correct or wrong.
+ - Press the icon in the upper right corner and then "Rank"
+ We will get the user's ranking.
+ - Press About or HELP to get some help information
+ 
+ - Press the icon in the upper leftcorner 
+ We can see that our port number is showing on the navigation bar.
+ 
+ - Press "Top 5 Scorers"
+ We will get top 5 scorer graph in the quiz.
+ - Press "Last 5 Questions"
+  We will get last 5 questions that the user answered.
+ - Stop PhoneGap server and remove the questionApp code
+   -Press Ctrl + C to stop the server.
+   -Go back to /code directory
+   -Remove the code
+   >```
+   >cd
+   >cd code
+   >pwd
+   >/home/studentuser/code
+   >rm -Rf uczlm97_quiz
+   >```
 
-- Press the icon in the upper leftcorner 
-We can see that our port number is showing on the navigation bar.
-
-- Press "Top 5 Scorers"
-We will get top 5 scorer graph in the quiz.
-- Press "Last 5 Questions"
-We will get last 5 questions that the user answered.
-- Stop PhoneGap server and remove the questionApp code
-- Press Ctrl + C to stop the server.
-- Go back to /code directory
-- Remove the code
->```
->cd
->cd code
->pwd
->/home/studentuser/code
->rm -Rf uczlm97_quiz
->```
 
 
 ## Files
@@ -169,12 +172,17 @@ uczlm97_server  |`httpServer.js`            |an HTTP sevrer serves data to the q
 uczlm97_questions|`createQuestionForm.html`            |a html file contains a question form|
 uczlm97_questions|`questionAppHelp.html`            |a help document for questionApp |
 uczlm97_questions|`index.html`            |the default ‘index.html’ page that is created for any new PhoneGapApp and is adapted for running custom functions|
+uczlm97_questions|`d3MyRates1.html`            |the code to visualize how many questions have been answered by my user in the past week|
+uczlm97_questions|`d3MyRates2.html`            |the code to visualize how many questions have been answered correctly by my user in the past week|
+uczlm97_questions|`d3AllRates1.html`            |the code to visualize how many questions have been answered by any user in the past week|
+uczlm97_questions|`d3AllRates2.html`            |the code to visualize how many questions have been answered correctly by any user in the past week|
 uczlm97_questions|`leafletFunction.js`            |the code to get latitude and longitude by a user clicking and fix the number to show 6 decimal places|
-uczlm97_questions|`questionsLoad.js`            |the code to load GEOJSON data(quiz point layer)|
+uczlm97_questions|`questionsLoad.js`            |the code to load GEOJSON data(quiz point layer) and  map layer showing all the questions added in the last week (by any user), and list of the 5 most difficult questions|
 uczlm97_questions|`uploadQuestion.js`            |the code is used to check if the submitted question is vaild or not and insert new questions into database|
 uczlm97_quiz     |`index.html`|the default ‘index.html’ page that is created for any new PhoneGapApp and is adapted for running custom functions|
 uczlm97_quiz     |`quizAppHelp.html`|a help document for quizApp|
-uczlm97_quiz     |`quizLoad.js`|the code to load the quiz point layer and show the quiz as a popup|
+uczlm97_quiz     |`d3TopScorers.html`|the code to visualize  top 5 scorers in the quiz|
+uczlm97_quiz     |`quizLoad.js`|the code to load the quiz point layer and show the quiz as a popup, and map showing the last 5 questions that the user answered|
 uczlm97_quiz     |`uploadAnswer.js`|the code to upload answers and check answers are right or wrong|
 uczlm97_quiz     |`userTracking.js`|code to track user location and pop up the closest quiz point|
 uczlm97_questions&uczlm97_quiz     |`leaflet.awesome-markers.js`|Javascript required for the Leaflet Map|

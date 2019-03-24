@@ -33,6 +33,7 @@ function showPosition(position)
 		//avoiding updating too frequent
 		if(calculateDistance(userlat,userlng,position.coords.latitude, position.coords.longitude,  'K')>=0.01){
 			mymap.removeLayer(userMarker);
+			userMarker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap).bindPopup("<b>You were here at: </b>" + position.coords.latitude + ',' + position.coords.longitude);
 			userlat = position.coords.latitude;
 			userlng = position.coords.longitude;
 			closestFormPoint();
