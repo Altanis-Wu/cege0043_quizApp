@@ -4,12 +4,25 @@ var QuestionPointLayer;
 //createavariablethatwillholdtheXMLHttpRequest()
 var xhrQuestion;
 
+/*
 //automatically change latlng when the user clicked on map
 function changeLatlng(){
 	alert("Getting the latlng.");
 	//enter latlng and format numbers to show 6 decimal places 
 	document.getElementById("latitude").value=clickinglat.toFixed(6);
 	document.getElementById("longitude").value=clickinglng.toFixed(6);
+}
+*/
+//load or remove layer depending on the checkbox
+function checkQuestionLayer()
+{
+	if (document.getElementById('switch1').checked) 
+	{
+		loadQuestionPoint();
+	} 
+	else {
+		removeQuestionPoint();
+	}
 }
 
 //method to call the other functions to load 

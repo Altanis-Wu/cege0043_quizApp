@@ -27,7 +27,13 @@ function popupClickLocation()
 
 }
 
-
+//automatically change latlng when the user clicked on map
+function changeLatlng(){
+	alert("Getting the latlng.");
+	//enter latlng and format numbers to show 6 decimal places 
+	document.getElementById("latitude").value=clickinglat.toFixed(6);
+	document.getElementById("longitude").value=clickinglng.toFixed(6);
+}
 
 
 
