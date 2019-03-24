@@ -169,11 +169,16 @@ uczlm97_server  |`httpServer.js`            |an HTTP sevrer serves data to the q
 uczlm97_questions|`createQuestionForm.html`            |a html file contains a question form|
 uczlm97_questions|`questionAppHelp.html`            |a help document for questionApp |
 uczlm97_questions|`index.html`            |the default ‘index.html’ page that is created for any new PhoneGapApp and is adapted for running custom functions|
+uczlm97_questions|`d3MyRates1.html`            |the code to visualize how many questions have been answered by my user in the past week|
+uczlm97_questions|`d3MyRates2.html`            |the code to visualize how many questions have been answered correctly by my user in the past week|
+uczlm97_questions|`d3AllRates1.html`            |the code to visualize how many questions have been answered by any user in the past week|
+uczlm97_questions|`d3AllRates2.html`            |the code to visualize how many questions have been answered correctly by any user in the past week|
 uczlm97_questions|`leafletFunction.js`            |the code to get latitude and longitude by a user clicking and fix the number to show 6 decimal places|
 uczlm97_questions|`questionsLoad.js`            |the code to load GEOJSON data(quiz point layer)|
 uczlm97_questions|`uploadQuestion.js`            |the code is used to check if the submitted question is vaild or not and insert new questions into database|
 uczlm97_quiz     |`index.html`|the default ‘index.html’ page that is created for any new PhoneGapApp and is adapted for running custom functions|
 uczlm97_quiz     |`quizAppHelp.html`|a help document for quizApp|
+uczlm97_quiz     |`d3TopScorers.html`|the code to visualize  top 5 scorers in the quiz|
 uczlm97_quiz     |`quizLoad.js`|the code to load the quiz point layer and show the quiz as a popup|
 uczlm97_quiz     |`uploadAnswer.js`|the code to upload answers and check answers are right or wrong|
 uczlm97_quiz     |`userTracking.js`|code to track user location and pop up the closest quiz point|
