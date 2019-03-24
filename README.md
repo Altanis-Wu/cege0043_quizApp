@@ -160,24 +160,24 @@ Getting the popup, we are supposed to submit an answer.
 ## Files
 
 This App mainly has three repositories **[uczlm97_quiz](https://github.com/ucl-geospatial/uczlm97_quiz)**, **[uczlm97_questions](https://github.com/ucl-geospatial/uczlm97_questions)** and **[uczlm97_server](https://github.com/ucl-geospatial/uczlm97_server)**. The submodules are **[uczlm97_jsReference](https://github.com/GEOGMLIU/uczlm97_jsReference)**, **[uczlm97_cssReference](https://github.com/GEOGMLIU/uczlm97_cssReference)** and **[uczlm97_imagesReference](https://github.com/GEOGMLIU/uczlm97_imagesReference)**.
-|                |file                           |function                     |
-|----------------|-------------------------------|-----------------------------|
-|uczlm97_server  |`httpServer.js`            |an HTTP sevrer serves data to the quizApp and questionApp|
-|uczlm97_questions|`createQuestionForm.html`            |a html file contains a question form|
-|uczlm97_questions|`questionAppHelp.html`            |a help document for questionApp |
-|uczlm97_questions|`index.html`            |the default ‘index.html’ page that is created for any new PhoneGapApp and is adapted for running custom functions|
-|uczlm97_questions|`leafletFunction.js`            |the code to get latitude and longitude by a user clicking and fix the number to show 6 decimal places|
-|uczlm97_questions|`questionsLoad.js`            |the code to load GEOJSON data(quiz point layer)|
-|uczlm97_questions|`uploadQuestion.js`            |the code is used to check if the submitted question is vaild or not and insert new questions into database|
-|uczlm97_quiz     |`index.html`|the default ‘index.html’ page that is created for any new PhoneGapApp and is adapted for running custom functions|
-|uczlm97_quiz     |`quizAppHelp.html`|a help document for quizApp|
-|uczlm97_quiz     |`quizLoad.js`|the code to load the quiz point layer and show the quiz as a popup|
-|uczlm97_quiz     |`uploadAnswer.js`|the code to upload answers and check answers are right or wrong|
-|uczlm97_quiz     |`userTracking.js`|code to track user location and pop up the closest quiz point|
-|uczlm97_questions&uczlm97_quiz     |`leaflet.awesome-markers.js`|Javascript required for the Leaflet Map|
-|uczlm97_questions&uczlm97_quiz     |`leaflet.js`|Javascript required for the Leaflet Map|
-|uczlm97_questions&uczlm97_quiz     |`startup.js`|startup functions contain sepcific code that we want to run when the page is loaded|
-|uczlm97_questions&uczlm97_quiz     |`utilities.js`|function to get the httpPortNumber and httpsPortNumber|
+                |file                           |function                     |
+--- | --- | --- |
+uczlm97_server  |`httpServer.js`            |an HTTP sevrer serves data to the quizApp and questionApp|
+uczlm97_questions|`createQuestionForm.html`            |a html file contains a question form|
+uczlm97_questions|`questionAppHelp.html`            |a help document for questionApp |
+uczlm97_questions|`index.html`            |the default ‘index.html’ page that is created for any new PhoneGapApp and is adapted for running custom functions|
+uczlm97_questions|`leafletFunction.js`            |the code to get latitude and longitude by a user clicking and fix the number to show 6 decimal places|
+uczlm97_questions|`questionsLoad.js`            |the code to load GEOJSON data(quiz point layer)|
+uczlm97_questions|`uploadQuestion.js`            |the code is used to check if the submitted question is vaild or not and insert new questions into database|
+uczlm97_quiz     |`index.html`|the default ‘index.html’ page that is created for any new PhoneGapApp and is adapted for running custom functions|
+uczlm97_quiz     |`quizAppHelp.html`|a help document for quizApp|
+uczlm97_quiz     |`quizLoad.js`|the code to load the quiz point layer and show the quiz as a popup|
+uczlm97_quiz     |`uploadAnswer.js`|the code to upload answers and check answers are right or wrong|
+uczlm97_quiz     |`userTracking.js`|code to track user location and pop up the closest quiz point|
+uczlm97_questions&uczlm97_quiz     |`leaflet.awesome-markers.js`|Javascript required for the Leaflet Map|
+uczlm97_questions&uczlm97_quiz     |`leaflet.js`|Javascript required for the Leaflet Map|
+uczlm97_questions&uczlm97_quiz     |`startup.js`|startup functions contain sepcific code that we want to run when the page is loaded|
+uczlm97_questions&uczlm97_quiz     |`utilities.js`|function to get the httpPortNumber and httpsPortNumber|
 
 ## Acknowledgments
 The **third party code** that have been referenced shows as follows.
