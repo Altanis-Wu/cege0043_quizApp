@@ -74,48 +74,47 @@ git clone https://github.com/ucl-geospatial/uczlm97_quiz.git
 ```
 cd uczlm97_quiz/uczlm97/www
 ```
-
-
 ## Tests
 After the deployment, you can test the App now.
-***NB***The questionApp and quizApp should be deploy and test separately.
+*NB.* The questionApp and quizApp should be deployed and tested separately.
 
 
 ###  questionApp
-- Start the PhoneGap App Server
-> ```
+ - Start the PhoneGap App Server
+ > ```
 >phonegap serve
 >```
-- Go to [http://developer.cege.ucl.ac.uk:31289/](http://developer.cege.ucl.ac.uk:31289/) in your browser
-
-- Click a point on the map and fill in the question form, then submit
-In the App homepage, we can click on a point on the Leaflet map. The function will help us fill in the latitude and longitude automatically (you can also type in them manually). After finishing the table, we should press the "submit" button to upload the data. 
->Simple question example:
->title: Calculation
->text: 1 + 1 =
->answer_1: 1
->answer_2: 2
->answer_3: 3
->answer_4: 4
->correct answer: 2
->Laititude:0
->Longitude:0
+ - Go to [http://developer.cege.ucl.ac.uk:31289/](http://developer.cege.ucl.ac.uk:31289/) in your browser
+ 
+ - Click a point on the map and fill in the question form, then submit
+ In the App homepage, we can click on a point on the Leaflet map. The function will help us fill in the latitude and longitude automatically (you can also type in them manually). After finishing the table, we should press the "submit" button to upload the data. 
+ >Simple question example:
+ >title: Calculation
+ >text: 1 + 1 =
+ >answer_1: 1
+ >answer_2: 2
+ >answer_3: 3
+ >answer_4: 4
+ >correct answer: 2
+ >Laititude:0
+ >Longitude:0
 
 > We can also check the submission at [here](http://developer.cege.ucl.ac.uk:30289/getQuizPoints/30289).
->This URL is based on HTTP port number 30289.
-- Switch on / off the question Layer
-On the right-hand side, there is a navigation bar. You can load the question point layer through the toggle switch button.
-- Click on "Participation Rates"
--my daily rates
--all users data
-- Click on "Last Week Questions"
+	 >This URL is based on HTTP port number 30289.
+ - Switch on / off the question Layer
+ On the right-hand side, there is a navigation bar. You can load the question point layer through the toggle switch button.
+  - Switch on / off the "Last Week Questions"
 A new map layer showing  map layer showing all the questions added in the last week.
-- Click on "Most difficult Questions"
-You can see the list of  the 5 most difficult questions.
-- Stop PhoneGap server and remove the quizApp code
-- Press Ctrl + C to stop the server.
-- Go back to /code directory
-- Remove the code
+  - Click on "Participation Rates"
+		-my daily rates
+		-all users data
+ - Click on "Most difficult Questions"
+ You can see the list of  the 5 most difficult questions.
+ - Stop PhoneGap server and remove the quizApp code
+	-Press Ctrl + C to stop the server 
+	-Go back to /code directory 
+	-Remove the code
+
 >```
 >pwd 
 >/home/studentuser/code
@@ -123,41 +122,42 @@ You can see the list of  the 5 most difficult questions.
 >```
 
 ###  quizApp
-- Start the PhoneGap App Server
-```
+ - Start the PhoneGap App Server
+ ```
 phonegap serve
 ```
-- Enter the server address
-Next, we can start the PhoneGap App and wait for the closet popup quiz. 
->Address example:
->[http://developer.cege.ucl.ac.uk:31289/](http://developer.cege.ucl.ac.uk:31289/).
+ - Enter the server address
+ Next, we can start the PhoneGap App and wait for the closet popup quiz. 
+ >Address example:
+ >[http://developer.cege.ucl.ac.uk:31289/](http://developer.cege.ucl.ac.uk:31289/).
 
-- Press "Submit Answer"
+ - Press "Submit Answer"
 Getting the popup, we are supposed to submit an answer. 
-Meanwhile, we will get the feedback and our scorering records (excluding this latest answer result.)
-After that, the colour of marker will change to green or red depending on the submitted answer is correct or wrong.
-- Press the icon in the upper right corner and then "Rank"
-We will get the user's ranking.
-- Press About or HELP to get some help information
+ Meanwhile, we will get the feedback and our scorering records (excluding this latest answer result.)
+ After that, the colour of marker will change to green or red depending on the submitted answer is correct or wrong.
+ - Press the icon in the upper right corner and then "Rank"
+ We will get the user's ranking.
+ - Press About or HELP to get some help information
+ 
+ - Press the icon in the upper leftcorner 
+ We can see that our port number is showing on the navigation bar.
+ 
+ - Press "Top 5 Scorers"
+ We will get top 5 scorer graph in the quiz.
+ - Press "Last 5 Questions"
+  We will get last 5 questions that the user answered.
+ - Stop PhoneGap server and remove the questionApp code
+   -Press Ctrl + C to stop the server.
+   -Go back to /code directory
+   -Remove the code
+   >```
+   >cd
+   >cd code
+   >pwd
+   >/home/studentuser/code
+   >rm -Rf uczlm97_quiz
+   >```
 
-- Press the icon in the upper leftcorner 
-We can see that our port number is showing on the navigation bar.
-
-- Press "Top 5 Scorers"
-We will get top 5 scorer graph in the quiz.
-- Press "Last 5 Questions"
-We will get last 5 questions that the user answered.
-- Stop PhoneGap server and remove the questionApp code
-- Press Ctrl + C to stop the server.
-- Go back to /code directory
-- Remove the code
->```
->cd
->cd code
->pwd
->/home/studentuser/code
->rm -Rf uczlm97_quiz
->```
 
 
 ## Files
